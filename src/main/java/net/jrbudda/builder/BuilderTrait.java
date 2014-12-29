@@ -14,9 +14,10 @@ import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 import net.citizensnpcs.trait.Toggleable;
 
-import net.minecraft.server.v1_7_R4.NBTTagCompound;
-import net.minecraft.server.v1_7_R4.TileEntity;
-import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
+import net.minecraft.server.v1_8_R1.BlockPosition;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
+import net.minecraft.server.v1_8_R1.TileEntity;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -603,7 +604,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 				nmsnbt.setInt("x", pending.getX());
 				nmsnbt.setInt("y", pending.getY());
 				nmsnbt.setInt("z", pending.getZ());			
-				TileEntity te = cw.getHandle().getTileEntity(pending.getX(), pending.getY(), pending.getZ());		
+				TileEntity te = cw.getHandle().getTileEntity(new BlockPosition(pending.getX(), pending.getY(), pending.getZ()));
 				te.a(nmsnbt);
 			}
 

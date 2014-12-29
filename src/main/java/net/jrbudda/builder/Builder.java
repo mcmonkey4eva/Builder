@@ -17,8 +17,8 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.api.trait.trait.Owner;
 
-import net.minecraft.server.v1_7_R4.Block;
-import net.minecraft.server.v1_7_R4.Item;
+import net.minecraft.server.v1_8_R1.Block;
+import net.minecraft.server.v1_8_R1.Item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -262,7 +262,8 @@ public class Builder extends JavaPlugin {
 			StringBuilder sb = new StringBuilder();
 
 			for (int j = 1; j < 137; j++) {
-				sb.append( j+":"+ Util.getLocalItemName(j) +" > " +  (Block.getById(j).getDropType(j, Util.R,-10000)) +":" + Util.getLocalItemName(Item.getId(Block.getById(j).getDropType(j, Util.R, -10000)))+ "\n" );
+				Block block = Block.getById(j);
+				sb.append( j+":"+ Util.getLocalItemName(j) +" > " +  (block.getDropType(block.getBlockData(), Util.R, -10000)) +":" + Util.getLocalItemName(Item.getId(block.getDropType(block.getBlockData(), Util.R, -10000)))+ "\n" );
 			}
 
 			java.io.File f = new File("mats.txt");
