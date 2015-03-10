@@ -14,10 +14,10 @@ import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 import net.citizensnpcs.trait.Toggleable;
 
-import net.minecraft.server.v1_8_R1.BlockPosition;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.TileEntity;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import net.minecraft.server.v1_8_R2.BlockPosition;
+import net.minecraft.server.v1_8_R2.NBTTagCompound;
+import net.minecraft.server.v1_8_R2.TileEntity;
+import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

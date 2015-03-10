@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
@@ -17,8 +18,8 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.api.trait.trait.Owner;
 
-import net.minecraft.server.v1_8_R1.Block;
-import net.minecraft.server.v1_8_R1.Item;
+import net.minecraft.server.v1_8_R2.Block;
+import net.minecraft.server.v1_8_R2.Item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -135,9 +136,9 @@ public class Builder extends JavaPlugin {
 		try {
 			if(denizen==null) return "Denizen plugin not found!";	
 			dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
-			net.aufdemrand.denizen.scripts.containers.core.TaskScriptContainer task = net.aufdemrand.denizen.scripts.ScriptRegistry.getScriptContainerAs(taskname, net.aufdemrand.denizen.scripts.containers.core.TaskScriptContainer.class);
+			net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer task = net.aufdemrand.denizencore.scripts.ScriptRegistry.getScriptContainerAs(taskname, net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer.class);
 			if (task !=null){
-				task.runTaskScript(null, dnpc, null);
+				task.runTaskScript(new BukkitScriptEntryData(null, dnpc), null);
 			}
 			else return "Task: " + taskname + " was not found!";
 			return null;
