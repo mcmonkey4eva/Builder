@@ -18,8 +18,8 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.api.trait.trait.Owner;
 
-import net.minecraft.server.v1_8_R3.Block;
-import net.minecraft.server.v1_8_R3.Item;
+import net.minecraft.server.v1_9_R1.Block;
+import net.minecraft.server.v1_9_R1.Item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -64,9 +64,9 @@ public class Builder extends JavaPlugin {
 
 		if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
 			getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
-			getServer().getPluginManager().disablePlugin(this);	
+			getServer().getPluginManager().disablePlugin(this);
 			return;
-		}	
+		}
 		try {
 			setupDenizenHook();
 		} catch (ActivationException e) {
@@ -134,7 +134,7 @@ public class Builder extends JavaPlugin {
 
 	private String runTaskv9(String taskname, NPC npc){
 		try {
-			if(denizen==null) return "Denizen plugin not found!";	
+			if(denizen==null) return "Denizen plugin not found!";
 			dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
 			net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer task = net.aufdemrand.denizencore.scripts.ScriptRegistry.getScriptContainerAs(taskname, net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer.class);
 			if (task !=null){
@@ -153,12 +153,12 @@ public class Builder extends JavaPlugin {
 			try {
 				if(npc.hasTrait(net.aufdemrand.denizen.npc.traits.AssignmentTrait.class)){
 					dNPC dnpc = dNPC.mirrorCitizensNPC(npc);
-					dnpc.action(action, null);			
+					dnpc.action(action, null);
 				}
 			} catch (Exception e) {
 				getLogger().log(Level.WARNING, "Error running action!");
 				e.printStackTrace();
-			}		
+			}
 		}
 	}
 
@@ -168,16 +168,16 @@ public class Builder extends JavaPlugin {
 		Bukkit.getServer().getScheduler().cancelTasks(this);
 	}
 
-	private	boolean tryParseInt(String value)  
-	{  
-		try  
-		{  
-			Integer.parseInt(value);  
-			return true;  
-		} catch(NumberFormatException nfe)  
-		{  
-			return false;  
-		}  
+	private	boolean tryParseInt(String value)
+	{
+		try
+		{
+			Integer.parseInt(value);
+			return true;
+		} catch(NumberFormatException nfe)
+		{
+			return false;
+		}
 	}
 
 
@@ -215,7 +215,7 @@ public class Builder extends JavaPlugin {
 
 		if (args[0].equalsIgnoreCase("help")) {
 			player.sendMessage(ChatColor.GOLD + "------- Builder Commands -------");
-			player.sendMessage(ChatColor.GOLD + "You can use /builder (id) [command] [args] to perform any of these commands on a builder  without having it selected.");			
+			player.sendMessage(ChatColor.GOLD + "You can use /builder (id) [command] [args] to perform any of these commands on a builder  without having it selected.");
 			player.sendMessage(ChatColor.GOLD + "");
 			player.sendMessage(ChatColor.GOLD + "/builder reload");
 			player.sendMessage(ChatColor.GOLD + "  reload the config.yml");
@@ -244,9 +244,9 @@ public class Builder extends JavaPlugin {
 			player.sendMessage(ChatColor.GOLD + "/builder timeout [0.1 - 2000000.0]");
 			player.sendMessage(ChatColor.GOLD + "  Sets the maximum number of seconds between blocks");
 			player.sendMessage(ChatColor.GOLD + "/builder supply [true/false]");
-			player.sendMessage(ChatColor.GOLD + "  set whether the Builder needs to be supplied with materials before building.");	
+			player.sendMessage(ChatColor.GOLD + "  set whether the Builder needs to be supplied with materials before building.");
 			player.sendMessage(ChatColor.GOLD + "/builder hold [true/false]");
-			player.sendMessage(ChatColor.GOLD + "  set whether the Builder holds blocks while building.");	
+			player.sendMessage(ChatColor.GOLD + "  set whether the Builder holds blocks while building.");
 			return true;
 		}
 		else if (args[0].equalsIgnoreCase("reload")) {
@@ -270,7 +270,7 @@ public class Builder extends JavaPlugin {
 			java.io.File f = new File("mats.txt");
 			java.io.FileWriter fw;
 			try {
-				fw = new java.io.FileWriter(f);					
+				fw = new java.io.FileWriter(f);
 				fw.write(sb.toString());
 				fw.close();
 			} catch (IOException e) {
@@ -285,10 +285,10 @@ public class Builder extends JavaPlugin {
 			}
 
 			// Directory path here
-			String path =schematicsFolder; 
+			String path =schematicsFolder;
 
 			File folder = new File(path);
-			File[] listOfFiles = folder.listFiles(); 
+			File[] listOfFiles = folder.listFiles();
 			StringBuilder out = new StringBuilder();
 			int i1= 0;
 
@@ -297,10 +297,10 @@ public class Builder extends JavaPlugin {
 				return true;
 			}
 
-			for ( i1 = 0; i1 < listOfFiles.length-1; i1++) 
+			for ( i1 = 0; i1 < listOfFiles.length-1; i1++)
 			{
 
-				if (listOfFiles[i1].isFile()) 
+				if (listOfFiles[i1].isFile())
 				{
 					String   file = listOfFiles[i1].getName();
 					if (file.endsWith(".schematic") )
@@ -311,7 +311,7 @@ public class Builder extends JavaPlugin {
 			}
 
 
-			if (listOfFiles[i1].isFile()) 
+			if (listOfFiles[i1].isFile())
 			{
 				String   file = listOfFiles[i1].getName();
 				if (file.endsWith(".schematic") )
@@ -340,10 +340,10 @@ public class Builder extends JavaPlugin {
 			else{
 				player.sendMessage(ChatColor.RED + "You must have a NPC selected to use this command");
 				return true;
-			}			
+			}
 		}
 
-		ThisNPC = CitizensAPI.getNPCRegistry().getById(npcid); 
+		ThisNPC = CitizensAPI.getNPCRegistry().getById(npcid);
 
 		if (ThisNPC == null) {
 			player.sendMessage(ChatColor.RED + "NPC with id " + npcid + " not found");
@@ -397,8 +397,8 @@ public class Builder extends JavaPlugin {
 			inst.GroupByLayer = true;
 			inst.BuildYLayers = 1;
 			inst.Silent = false;
-			inst.BuildPatternXY = net.jrbudda.builder.BuilderTrait.BuildPatternsXZ.spiral;			
-		
+			inst.BuildPatternXY = net.jrbudda.builder.BuilderTrait.BuildPatternsXZ.spiral;
+
 			for (int a = 0; a< args.length; a++){
 				if (args[a].equalsIgnoreCase("silent")){
 					if (args[a].equalsIgnoreCase("silent")){
@@ -526,7 +526,7 @@ public class Builder extends JavaPlugin {
 					inst.Origin = inst.getNPC().getEntity().getLocation();
 					player.sendMessage(ChatColor.GREEN + ThisNPC.getName() + " build origin has been set to its current location.");   // Talk to the player.
 				}
-				else		player.sendMessage(ChatColor.RED + ThisNPC.getName() + " not spawned."); 
+				else		player.sendMessage(ChatColor.RED + ThisNPC.getName() + " not spawned.");
 			}
 			else {
 				if(args[1].equalsIgnoreCase("clear")){
@@ -550,14 +550,14 @@ public class Builder extends JavaPlugin {
 						inst.Origin = ((Player)player).getLocation().clone();
 						player.sendMessage(ChatColor.GREEN + ThisNPC.getName() + " build origin has been set to your location");   // Talk to the player.
 					}
-					else 	player.sendMessage(ChatColor.RED +  "This command can only be used in-game");  
+					else 	player.sendMessage(ChatColor.RED +  "This command can only be used in-game");
 				}
 				else if(args[1].equalsIgnoreCase("current")){
 					if(inst.State == net.jrbudda.builder.BuilderTrait.BuilderState.building){
 						inst.Origin = inst.ContinueLoc.clone();
 						player.sendMessage(ChatColor.GREEN + ThisNPC.getName() + " build origin has been set to the origin of the current build");   // Talk to the player.
 					}
-					else 	player.sendMessage(ChatColor.RED +  ThisNPC.getName() + " is not currently building!");  
+					else 	player.sendMessage(ChatColor.RED +  ThisNPC.getName() + " is not currently building!");
 				}
 				else if(args[1].split(",").length == 3){
 					try {
@@ -569,10 +569,10 @@ public class Builder extends JavaPlugin {
 
 						player.sendMessage(ChatColor.GREEN + ThisNPC.getName() + " build origin has been set to " + inst.Origin.toString());   // Talk to the player.
 					} catch (Exception e) {
-						player.sendMessage(ChatColor.RED + "Invalid Coordinates");  
+						player.sendMessage(ChatColor.RED + "Invalid Coordinates");
 					}
 				}
-				else player.sendMessage(ChatColor.RED + "Unknown origin command"); 
+				else player.sendMessage(ChatColor.RED + "Unknown origin command");
 			}
 			return true;
 		}
@@ -588,7 +588,7 @@ public class Builder extends JavaPlugin {
 				mat = getMat(args[1]);
 				if(!this.MarkMats.contains(mat)) {
 					mat = -1;
-					player.sendMessage(ChatColor.GOLD + ThisNPC.getName() + " can not mark with " + args[1]+ ".The specified item is not allowed. Using default.");   // Talk to the player.	
+					player.sendMessage(ChatColor.GOLD + ThisNPC.getName() + " can not mark with " + args[1]+ ".The specified item is not allowed. Using default.");   // Talk to the player.
 				}
 			}
 
@@ -609,7 +609,7 @@ public class Builder extends JavaPlugin {
 			if(!player.hasPermission("builder.load")) {
 				player.sendMessage(ChatColor.RED + "You do not have permissions for that command.");
 				return true;
-			}		
+			}
 
 			if (inst.State != net.jrbudda.builder.BuilderTrait.BuilderState.idle) {
 				player.sendMessage(ChatColor.RED + "Please cancel current build before loading new schematic.");
@@ -634,9 +634,9 @@ public class Builder extends JavaPlugin {
 					if(npc.hasTrait(BuilderTrait.class)){
 						BuilderTrait bt = npc.getTrait(BuilderTrait.class);
 						if (bt.schematic!=null && bt.schematic.Name.equals(arg)){
-							inst.schematic = bt.schematic;		
+							inst.schematic = bt.schematic;
 						}
-					}					
+					}
 				}
 
 				//load it from file if not found.
@@ -667,7 +667,7 @@ public class Builder extends JavaPlugin {
 				player.sendMessage(ChatColor.RED +"You must specify a schematic" );   // Talk to the player.
 			}
 			return true;
-		}		
+		}
 		else if (args[0].equalsIgnoreCase("timeout")) {
 			if(!player.hasPermission("builder.timeout")) {
 				player.sendMessage(ChatColor.RED + "You do not have permissions for that command.");
@@ -757,7 +757,7 @@ public class Builder extends JavaPlugin {
 				player.sendMessage(ChatColor.BLUE + "Blocks: Total: " + ChatColor.WHITE + c + ChatColor.BLUE + "  Remaining: " + ChatColor.WHITE + inst.Q.size());
 				double percent = ((double)(c-inst.Q.size()) / (double)c)* 100;
 				player.sendMessage(ChatColor.BLUE + "Complete: " +ChatColor.WHITE + String.format("%1$.1f", percent)+ "%");
-			}	
+			}
 			return true;
 		}
 		return false;
@@ -769,7 +769,7 @@ public class Builder extends JavaPlugin {
 
 		org.bukkit.Material M = org.bukkit.Material.getMaterial(S.toUpperCase().split(":")[0]);
 
-		if (item == -1) {	
+		if (item == -1) {
 			try {
 				item = Integer.parseInt(S.split(":")[0]);
 			} catch (Exception e) {

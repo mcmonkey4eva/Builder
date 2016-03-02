@@ -1,55 +1,27 @@
 package net.jrbudda.builder;
 
+import net.citizensnpcs.api.jnbt.*;
+import net.jrbudda.builder.Builder.supplymap;
+import net.minecraft.server.v1_9_R1.*;
+import org.bukkit.ChatColor;
+import org.bukkit.material.MaterialData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.Random;
 
-import net.citizensnpcs.api.jnbt.ByteArrayTag;
-import net.citizensnpcs.api.jnbt.ByteTag;
-import net.citizensnpcs.api.jnbt.CompoundTag;
-import net.citizensnpcs.api.jnbt.DoubleTag;
-import net.citizensnpcs.api.jnbt.EndTag;
-import net.citizensnpcs.api.jnbt.FloatTag;
-import net.citizensnpcs.api.jnbt.IntArrayTag;
-import net.citizensnpcs.api.jnbt.IntTag;
-import net.citizensnpcs.api.jnbt.ListTag;
-import net.citizensnpcs.api.jnbt.LongTag;
-import net.citizensnpcs.api.jnbt.ShortTag;
-import net.citizensnpcs.api.jnbt.StringTag;
-import net.citizensnpcs.api.jnbt.Tag;
-import net.jrbudda.builder.Builder.supplymap;
 ////
-import net.minecraft.server.v1_8_R3.Block;
-import net.minecraft.server.v1_8_R3.Item;
-import net.minecraft.server.v1_8_R3.LocaleI18n;
-import net.minecraft.server.v1_8_R3.NBTBase;
-import net.minecraft.server.v1_8_R3.NBTTagByte;
-import net.minecraft.server.v1_8_R3.NBTTagByteArray;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.NBTTagDouble;
-import net.minecraft.server.v1_8_R3.NBTTagEnd;
-import net.minecraft.server.v1_8_R3.NBTTagFloat;
-import net.minecraft.server.v1_8_R3.NBTTagInt;
-import net.minecraft.server.v1_8_R3.NBTTagIntArray;
-import net.minecraft.server.v1_8_R3.NBTTagList;
-import net.minecraft.server.v1_8_R3.NBTTagLong;
-import net.minecraft.server.v1_8_R3.NBTTagShort;
-import net.minecraft.server.v1_8_R3.NBTTagString;
 ////
-
-
-import org.bukkit.ChatColor;
-import org.bukkit.material.MaterialData;
 
 
 public class Util {
 
 	static MaterialData Air = new MaterialData(0,(byte) 0);
-	
+
 	public static String printList(Map<Integer, Double> map){
 		StringBuilder sb = new StringBuilder();
 
@@ -60,7 +32,7 @@ public class Util {
 			if(i.getValue() > 0){
 				sb.append(ChatColor.GREEN + getLocalItemName(i.getKey()) + ":" +ChatColor.WHITE+ i.getValue().intValue());
 				if(it.hasNext())sb.append(", ");
-			}	
+			}
 		}
 		return sb.toString();
 	}
@@ -118,12 +90,12 @@ public class Util {
 				if (reverse){
 					for(int y=starty;y<starty+ylayers;y++){
 						if (y<n)out.add(a[k][y][i]);
-					}	
+					}
 				}
 				else {
 					for(int y=starty+ylayers-1;y>=starty;y--){
 						if (y<n)out.add(a[k][y][i]);
-					}	
+					}
 				}
 
 			}
@@ -136,12 +108,12 @@ public class Util {
 				if (reverse){
 					for(int y=starty;y<starty+ylayers;y++){
 						if (y<n)out.add(a[i][y][o-1]);
-					}	
+					}
 				}
 				else {
 					for(int y=starty+ylayers-1;y>=starty;y--){
 						if (y<n)out.add(a[i][y][o-1]);
-					}	
+					}
 				}
 
 			}
@@ -156,12 +128,12 @@ public class Util {
 					if (reverse){
 						for(int y=starty;y<starty+ylayers;y++){
 							if (y<n)out.add(a[m-1][y][i]);
-						}	
+						}
 					}
 					else {
 						for(int y=starty+ylayers-1;y>=starty;y--){
 							if (y<n)out.add(a[m-1][y][i]);
-						}	
+						}
 					}
 
 
@@ -178,18 +150,18 @@ public class Util {
 					if (reverse){
 						for(int y=starty;y<starty+ylayers;y++){
 							if (y<n) out.add(a[i][y][l]);
-						}	
+						}
 					}
 					else {
 						for(int y=starty+ylayers-1;y>=starty;y--){
 							if (y<n) out.add(a[i][y][l]);
-						}	
+						}
 					}
 
 
 				}
-				l++;   
-			}       
+				l++;
+			}
 		}
 
 
@@ -223,12 +195,12 @@ public class Util {
 			if (!reverse){
 				for(int y=starty;y<starty+ylayers;y++){
 					if (y<n) out.add(a[i][y][k]);
-				}	
+				}
 			}
 			else {
 				for(int y=starty+ylayers-1;y>=starty;y--){
 					if (y<n) out.add(a[i][y][k]);
-				}	
+				}
 			}
 
 			i+=di;
@@ -237,9 +209,9 @@ public class Util {
 				i+=di;
 				k+=dk;
 				if (k >= o||k<0) {
-					k +=1;		
+					k +=1;
 					if(k>=o) break;
-				}		
+				}
 			}
 
 
@@ -263,17 +235,17 @@ public class Util {
 			int item = b.getMat().getItemTypeId();
 			double addamt = 1;
 
-			
+
 			if(Builder.SupplyMapping.containsKey(item)){
 				supplymap i = Builder.SupplyMapping.get(item);
 				item = i.require;
-				addamt = i.amount;				
-			}		
+				addamt = i.amount;
+			}
 			else{
 				Block block = Block.getById(item);
 				item =block !=null ? Item.getId(block.getDropType(block.fromLegacyData(b.getMat().getData()), R, -10000)) : item;
 			}
-			
+
 //			if (RequireUnobtainable){
 //				switch (item){
 //				case 0:
@@ -375,7 +347,7 @@ public class Util {
 				Double amt = out.get(item);
 				out.put(item,amt+addamt);
 			}
-			else	
+			else
 			{
 				out.put(item,addamt);
 			}
@@ -388,8 +360,8 @@ public class Util {
 
 	static boolean canStand(org.bukkit.block.Block base){
 		org.bukkit.block.Block below = base.getRelative(0, -1, 0);
-		if(!below.isEmpty() && Block.getById(below.getTypeId()).getMaterial().isSolid()){
-			if(base.isEmpty() || Block.getById(base.getTypeId()).getMaterial().isSolid()==false){
+		if(!below.isEmpty() && Block.getById(below.getTypeId()).getBlockData().getMaterial().isSolid()){
+			if(base.isEmpty() || Block.getById(base.getTypeId()).getBlockData().getMaterial().isSolid()==false){
 				return true;
 			}
 		}
@@ -441,5 +413,5 @@ public class Util {
                     + foreign.getClass().getCanonicalName());
         }
     }
-	
+
 }

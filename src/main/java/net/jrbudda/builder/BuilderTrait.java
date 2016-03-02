@@ -14,10 +14,10 @@ import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 import net.citizensnpcs.trait.Toggleable;
 
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.TileEntity;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import net.minecraft.server.v1_9_R1.BlockPosition;
+import net.minecraft.server.v1_9_R1.NBTTagCompound;
+import net.minecraft.server.v1_9_R1.TileEntity;
+import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -92,7 +92,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 		if(MoveTimeout < .1) MoveTimeout = .1;
 
 		try {
-			BuildPatternXY = BuildPatternsXZ.valueOf( key.getString("PatternXY","spiral"));	
+			BuildPatternXY = BuildPatternsXZ.valueOf( key.getString("PatternXY","spiral"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -107,7 +107,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 				}
 			} catch (Exception e) {
 				plugin.getLogger().log(java.util.logging.Level.WARNING,"Error loading schematic " + SchematicName +" for " + npc.getName() + ": " + e.getMessage());
-			}			
+			}
 		}
 
 		loaded = true;
@@ -183,7 +183,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 			key.setDouble("Origin.z", Origin.getZ());
 			key.setString("Origin.world", Origin.getWorld().getName());
 			key.setDouble("Origin.yaw", Origin.getYaw());
-			key.setDouble("Origin.pitch", Origin.getPitch());		
+			key.setDouble("Origin.pitch", Origin.getPitch());
 		}
 		else if(key.keyExists("Origin")) key.removeKey("Origin");
 
@@ -193,7 +193,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 			key.setDouble("ContinueLoc.z", ContinueLoc.getZ());
 			key.setString("ContinueLoc.world", ContinueLoc.getWorld().getName());
 			key.setDouble("ContinueLoc.yaw", ContinueLoc.getYaw());
-			key.setDouble("ContinueLoc.pitch", ContinueLoc.getPitch());		
+			key.setDouble("ContinueLoc.pitch", ContinueLoc.getPitch());
 		}
 		else if(key.keyExists("ContinueLoc")) key.removeKey("ContinueLoc");
 
@@ -249,7 +249,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 
 		Location start = null;
 
-		if (Origin !=null) start = Origin.clone(); 
+		if (Origin !=null) start = Origin.clone();
 		else if (ContinueLoc!=null) start = ContinueLoc.clone();
 		else start = npc.getEntity().getLocation().clone();
 
@@ -275,7 +275,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 			long c = 0;
 			while (it.hasNext()){
 				c+= it.next().getValue();
-			}	
+			}
 
 			if (c>0){
 				if (!Silent) sender.sendMessage(plugin.format(plugin.CollectingMessage, npc, schematic, sender, SchematicName, c+""));
@@ -296,7 +296,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 	//		if (this.State != BuilderState.idle) return "";
 	//
 	//		Location start = null;
-	//		if (Origin !=null) start = Origin.clone(); 
+	//		if (Origin !=null) start = Origin.clone();
 	//		else if (ContinueLoc!=null) start = ContinueLoc.clone();
 	//		else start = npc.getEntity().getLocation().clone();
 	//
@@ -322,7 +322,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 	//			int pamt = 0;
 	//			if(pinv.containsKey(i.getKey())) pamt = pinv.get(i.getKey());
 	//			if (pamt >= i.getValue()) sb.append(ChatColor.GREEN);
-	//			else sb.append(ChatColor.RED);	
+	//			else sb.append(ChatColor.RED);
 	//			sb.append(i.getKey() + ":" + i.getValue());
 	//			if(it.hasNext())sb.append(ChatColor.RESET + ", ");
 	//		}
@@ -340,7 +340,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 
 		Location start = null;
 
-		if (Origin !=null) start = Origin.clone(); 
+		if (Origin !=null) start = Origin.clone();
 		else if (ContinueLoc!=null) start = ContinueLoc.clone();
 		else start = npc.getEntity().getLocation().clone();
 
@@ -361,9 +361,9 @@ public class BuilderTrait extends Trait implements Toggleable {
 			String resp = plugin.runTask(onStart, npc);
 			if(!Silent){
 			if (resp ==null) sender.sendMessage("Task " + onStart + " completed.");
-			else sender.sendMessage("Task " + onStart + " could not be run: " + resp);		
+			else sender.sendMessage("Task " + onStart + " could not be run: " + resp);
 			}
-			
+
 		}
 
 		plugin.DenizenAction(npc, "Build Start");
@@ -410,7 +410,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 		return true;
 	}
 
-	private CommandSender sender =null; 
+	private CommandSender sender =null;
 
 	private EmptyBuildBlock next = null;
 	private Block pending = null;
@@ -443,7 +443,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 						public void run() {
 							SetupNextBlock();
 						}
-					});	
+					});
 					return;
 				}
 
@@ -483,7 +483,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 				int m = next.getMat().getItemTypeId();
 				if (m <=0) m = 278;
 
-				if((npc.getEntity() instanceof org.bukkit.entity.HumanEntity) && this.HoldItems)((org.bukkit.entity.HumanEntity) npc.getEntity()).getInventory().setItemInHand(new ItemStack(m));	
+				if((npc.getEntity() instanceof org.bukkit.entity.HumanEntity) && this.HoldItems)((org.bukkit.entity.HumanEntity) npc.getEntity()).getInventory().setItemInHand(new ItemStack(m));
 				else if((npc.getEntity() instanceof org.bukkit.entity.Enderman) && this.HoldItems)	((org.bukkit.entity.Enderman) npc.getEntity()).setCarriedMaterial(new MaterialData(m));
 			}
 		}
@@ -495,7 +495,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 					npc.getNavigator().setTarget(findaspot(pending).add(.5, 1, .5));
 					npc.getNavigator().getLocalParameters().stationaryTicks((int) (MoveTimeout*20));
 					npc.getNavigator().getLocalParameters().stuckAction(BuilderTeleportStuckAction.INSTANCE);
-				}	
+				}
 			}
 		});
 
@@ -505,7 +505,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 					if(npc.getNavigator().isNavigating()){
 						npc.getEntity().teleport(npc.getNavigator().getTargetAsLocation());
 						npc.getNavigator().cancelNavigation();
-					}		
+					}
 				}
 			}
 		}, (long) (MoveTimeout*20)+1);
@@ -532,7 +532,7 @@ public class BuilderTrait extends Trait implements Toggleable {
 				String resp = plugin.runTask(oncomplete, npc);
 				if(!Silent){
 				if (resp ==null) sender.sendMessage("Task " + oncomplete + " completed.");
-				else sender.sendMessage("Task " + oncomplete + " could not be run: " + resp);	
+				else sender.sendMessage("Task " + oncomplete + " could not be run: " + resp);
 				}
 			}
 
@@ -558,14 +558,14 @@ public class BuilderTrait extends Trait implements Toggleable {
 		}
 		else{
 			this.State =BuilderState.idle;
-			if (stop && npc.isSpawned()){	
+			if (stop && npc.isSpawned()){
 				if (npc.getNavigator().isNavigating())	npc.getNavigator().cancelNavigation();
 				npc.getNavigator().setTarget(mypos);
 			}
 		}
 
 
-		if((npc.getEntity() instanceof org.bukkit.entity.HumanEntity) && this.HoldItems)((org.bukkit.entity.HumanEntity) npc.getEntity()).getInventory().setItemInHand(new ItemStack(0));	
+		if((npc.getEntity() instanceof org.bukkit.entity.HumanEntity) && this.HoldItems)((org.bukkit.entity.HumanEntity) npc.getEntity()).getInventory().setItemInHand(new ItemStack(0));
 		else if((npc.getEntity() instanceof org.bukkit.entity.Enderman) && this.HoldItems)	((org.bukkit.entity.Enderman) npc.getEntity()).setCarriedMaterial(new MaterialData(0));
 
 		if (stop && plugin.getServer().getPluginManager().getPlugin("dynmap") != null){
@@ -596,14 +596,14 @@ public class BuilderTrait extends Trait implements Toggleable {
 
 			pending.setTypeIdAndData(next.getMat().getItemTypeId(), next.getMat().getData(), false);
 
-			if (next instanceof TileBuildBlock){			
+			if (next instanceof TileBuildBlock){
 				//lol what
-				CraftWorld cw =(CraftWorld)pending.getWorld();			
+				CraftWorld cw =(CraftWorld)pending.getWorld();
 				CompoundTag nbt = new CompoundTag("", ((TileBuildBlock) next).tiles);
 				NBTTagCompound nmsnbt = (NBTTagCompound) Util.fromNative(nbt);
 				nmsnbt.setInt("x", pending.getX());
 				nmsnbt.setInt("y", pending.getY());
-				nmsnbt.setInt("z", pending.getZ());			
+				nmsnbt.setInt("z", pending.getZ());
 				TileEntity te = cw.getHandle().getTileEntity(new BlockPosition(pending.getX(), pending.getY(), pending.getZ()));
 				te.a(nmsnbt);
 			}
