@@ -1,26 +1,12 @@
 package net.jrbudda.builder;
 
-//import java.util.HashMap;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.rmi.activation.ActivationException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.objects.dNPC;
 import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.api.trait.trait.Owner;
-
 import net.minecraft.server.v1_9_R1.Block;
 import net.minecraft.server.v1_9_R1.Item;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -31,6 +17,15 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.rmi.activation.ActivationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
 
 
 public class Builder extends JavaPlugin {
@@ -135,10 +130,10 @@ public class Builder extends JavaPlugin {
 	private String runTaskv9(String taskname, NPC npc){
 		try {
 			if(denizen==null) return "Denizen plugin not found!";
-			dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
+			net.aufdemrand.denizen.objects.dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
 			net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer task = net.aufdemrand.denizencore.scripts.ScriptRegistry.getScriptContainerAs(taskname, net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer.class);
 			if (task !=null){
-				task.runTaskScript(new BukkitScriptEntryData(null, dnpc), null);
+				task.runTaskScript(new net.aufdemrand.denizen.BukkitScriptEntryData(null, dnpc), null);
 			}
 			else return "Task: " + taskname + " was not found!";
 			return null;
@@ -152,7 +147,7 @@ public class Builder extends JavaPlugin {
 		if(denizen!=null){
 			try {
 				if(npc.hasTrait(net.aufdemrand.denizen.npc.traits.AssignmentTrait.class)){
-					dNPC dnpc = dNPC.mirrorCitizensNPC(npc);
+					net.aufdemrand.denizen.objects.dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
 					dnpc.action(action, null);
 				}
 			} catch (Exception e) {
