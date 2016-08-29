@@ -130,12 +130,7 @@ public class Builder extends JavaPlugin {
 	private String runTaskv9(String taskname, NPC npc){
 		try {
 			if(denizen==null) return "Denizen plugin not found!";
-			net.aufdemrand.denizen.objects.dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
-			net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer task = net.aufdemrand.denizencore.scripts.ScriptRegistry.getScriptContainerAs(taskname, net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer.class);
-			if (task !=null){
-				task.runTaskScript(new net.aufdemrand.denizen.BukkitScriptEntryData(null, dnpc), null);
-			}
-			else return "Task: " + taskname + " was not found!";
+			else if (!DenizenSupport.runTask(taskname, npc)) return "Task: " + taskname + " was not found!";
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,11 +141,9 @@ public class Builder extends JavaPlugin {
 	public void DenizenAction(NPC npc, String action){
 		if(denizen!=null){
 			try {
-				if(npc.hasTrait(net.aufdemrand.denizen.npc.traits.AssignmentTrait.class)){
-					net.aufdemrand.denizen.objects.dNPC dnpc = net.aufdemrand.denizen.objects.dNPC.mirrorCitizensNPC(npc);
-					dnpc.action(action, null);
-				}
-			} catch (Exception e) {
+				DenizenSupport.runAction(npc, action);
+			}
+			catch (Exception e) {
 				getLogger().log(Level.WARNING, "Error running action!");
 				e.printStackTrace();
 			}
