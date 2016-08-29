@@ -7,8 +7,6 @@ import net.aufdemrand.denizencore.scripts.ScriptRegistry;
 import net.aufdemrand.denizencore.scripts.containers.core.TaskScriptContainer;
 import net.citizensnpcs.api.npc.NPC;
 
-import java.util.logging.Level;
-
 public class DenizenSupport {
 
     public static boolean runTask(String taskName, NPC npc) {
@@ -21,7 +19,7 @@ public class DenizenSupport {
         return false;
     }
 
-    public static boolean runAction(NPC npc, String action) throws Exception {
+    public static void runAction(NPC npc, String action) throws Exception {
         if (npc.hasTrait(AssignmentTrait.class)){
             dNPC dnpc = dNPC.mirrorCitizensNPC(npc);
             dnpc.action(action, null);
