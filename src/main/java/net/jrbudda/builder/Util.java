@@ -164,8 +164,6 @@ public class Util {
 			}
 		}
 
-
-		if (!reverse) java.util.Collections.reverse(out);
 		return out;
 	}
 
@@ -216,8 +214,7 @@ public class Util {
 
 
 		}while(true);
-
-		if (reverse) java.util.Collections.reverse(out);
+		
 		return out;
 	}
 
