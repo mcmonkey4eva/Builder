@@ -730,7 +730,7 @@ public class BuilderTrait extends Trait implements Toggleable {
                 nmsnbt.setInt("y", pending.getY());
                 nmsnbt.setInt("z", pending.getZ());
                 TileEntity te = cw.getHandle().getTileEntity(new BlockPosition(pending.getX(), pending.getY(), pending.getZ()));
-                te.save(nmsnbt);
+                te.load(nmsnbt);
             }
 
 
