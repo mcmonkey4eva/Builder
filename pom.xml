@@ -10,7 +10,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <bukkit.version>1.12-R0.1-SNAPSHOT</bukkit.version>
+        <bukkit.version>1.12.1-R0.1-SNAPSHOT</bukkit.version>
         <citizens.version>2.0.22-SNAPSHOT</citizens.version>
         <denizen.version>1.0.2-SNAPSHOT</denizen.version>
     </properties>
