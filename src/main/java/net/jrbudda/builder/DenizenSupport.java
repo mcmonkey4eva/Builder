@@ -12,7 +12,7 @@ public class DenizenSupport {
     public static boolean runTask(String taskName, NPC npc) {
         dNPC dnpc = dNPC.mirrorCitizensNPC(npc);
         TaskScriptContainer task = ScriptRegistry.getScriptContainerAs(taskName, TaskScriptContainer.class);
-        if (task !=null) {
+        if (task != null) {
             task.runTaskScript(new BukkitScriptEntryData(null, dnpc), null);
             return true;
         }
@@ -20,7 +20,7 @@ public class DenizenSupport {
     }
 
     public static void runAction(NPC npc, String action) throws Exception {
-        if (npc.hasTrait(AssignmentTrait.class)){
+        if (npc.hasTrait(AssignmentTrait.class)) {
             dNPC dnpc = dNPC.mirrorCitizensNPC(npc);
             dnpc.action(action, null);
         }
